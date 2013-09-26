@@ -86,11 +86,11 @@ var APP = APP || {};
 	APP.router = {
 		init: function () {
 	  		routie({
-			  	'/home': function() {
-			    	APP.page.home();
+					'/home': function() {
+					APP.page.home();
 					},
-			  	'/schedule': function() {
-			    	APP.page.schedule();
+					'/schedule': function() {
+					APP.page.schedule();
 					},
 			    '/ranking': function() {
 			    	APP.page.ranking();
