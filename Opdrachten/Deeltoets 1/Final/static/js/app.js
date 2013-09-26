@@ -1,7 +1,7 @@
 // Namespace
 var APP = APP || {};
 
-// Self-invoking anomynous function
+// Anonymous self invoking function
 (function () {
 	
 	// Data objecten
@@ -74,7 +74,7 @@ var APP = APP || {};
 		]
 	};
 	
-	// Controller Init
+	// Controller Object
 	APP.controller = {
 		init: function () {
 			// Initialize router
@@ -82,7 +82,7 @@ var APP = APP || {};
 		}
 	};
 
-	// Router
+	// Router Object
 	APP.router = {
 		init: function () {
 	  		routie({
