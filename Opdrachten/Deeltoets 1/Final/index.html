@@ -30,6 +30,7 @@ Een inner function die toegang heeft tot een outer function variabelen.
 				<li><a href="#/schedule">Schedule</a></li>
 				<li><a href="#/ranking">Ranking</a></li>
 				<li><a href="#/game">Game</a></li>
+				<li><a href="#/movies">Movies</a></li>
 		  </ul>
 		</nav>
 	</header>
@@ -137,6 +138,36 @@ Een inner function die toegang heeft tot een outer function variabelen.
 			</table>
 
 		</section>
+
+		<section data-route="movies">
+			
+			<header>
+				<h1 data-bind="title"></h1>
+				<p data-bind="description"></p>
+			</header>
+
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Titel</th>
+						<th>Description</th>
+						<th>Release Date</th>
+						<th>Cover</th>
+					</tr>
+				</thead>
+				<tbody data-bind="reviews">
+					<tr>
+						<td data-bind="id"></td>
+						<td data-bind="title"></td>
+						<td data-bind="description"></td>
+						<td data-bind="release_date"></td>
+						<td data-bind="cover"></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</section>
 	</article>
 
 
@@ -150,7 +181,8 @@ Een inner function die toegang heeft tot een outer function variabelen.
 	<script src="static/js/lib/qwery.min.js" type="text/javascript"></script>
 	<!-- Transparency:	Verbindt data aan HTML elementen -->
 	<script src="static/js/lib/transparancy.min.js" type="text/javascript"></script>
-
+	<!-- Promise: 			promise.get/post/put/del (url, data, headers) -->
+	<script src="static/js/lib/promise.min.js" type="text/javascript"></script>
 	<!-- Application -->
 	<script src="static/js/app.js"></script>
 	

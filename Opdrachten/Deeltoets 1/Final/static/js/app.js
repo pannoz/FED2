@@ -3,6 +3,7 @@ var APP = APP || {};
 
 // Anonymous self invoking function
 (function () {
+	"use strict";
 	
 	// Data objecten
 	APP.home = {
@@ -74,6 +75,10 @@ var APP = APP || {};
 		]
 	};
 	
+	APP.movies = {
+
+	};
+
 	// Controller Object
 	APP.controller = {
 		init: function () {
@@ -97,6 +102,9 @@ var APP = APP || {};
 			    },
 			    '/game': function() {
 			    	APP.page.game();
+			    },
+			   	'/movies': function() {
+			    	APP.page.movies();
 			    },
 			    '*': function() {
 			    	APP.page.home();
@@ -148,6 +156,24 @@ var APP = APP || {};
 
 		game: function () {
 			Transparency.render(qwery('[data-route=game')[0], APP.game);
+			APP.router.change();
+		},
+
+		movies: function () {
+			promise.get('http://dennistel.nl/movies').then(function(error, text, xhr) {
+		    if (error) {
+		      console.log('Error ' + xhr.status);
+		      // Stop met de functie
+		      return;
+		    }
+
+		    APP.movies = 
+		    Transparency.render(qwery('[data-route=movies')[0], APP.movies);
+		    console.log('The page contains ' + text.length + ' character(s).');
+		    console.log(text)
+			});
+
+			
 			APP.router.change();
 		}
 	}
