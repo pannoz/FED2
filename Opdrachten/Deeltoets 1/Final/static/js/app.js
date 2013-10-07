@@ -74,10 +74,6 @@ var APP = APP || {};
 	    { score: "23", team1: "Boomsquad", team1Score: "15", team2: "Burning Snow", team2Score: "8"}
 		]
 	};
-	
-	APP.movies = {
-
-	};
 
 	// Controller Object
 	APP.controller = {
@@ -166,11 +162,10 @@ var APP = APP || {};
 		      // Stop met de functie
 		      return;
 		    }
-
-		    APP.movies = 
+		    APP.movies = JSON.parse(text);
 		    Transparency.render(qwery('[data-route=movies')[0], APP.movies);
-		    console.log('The page contains ' + text.length + ' character(s).');
-		    console.log(text)
+		    //console.log('The page contains ' + text.length + ' character(s).');
+		    //console.log(text)
 			});
 
 			
