@@ -5,7 +5,7 @@ var APP = APP || {};
 (function () {
 	"use strict";
 	
-	// Data objecten
+	// Data objecten haal dit weg je hebt dit is onnodige code
 	APP.home = {
 		title:'Welkom',
 		description:'Welkom op de applicatie',
