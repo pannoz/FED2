@@ -8,11 +8,6 @@ var APP = APP || {};
 	"use strict";
 	
 	// Data objecten
-	APP.home = {
-		title:'Welkom',
-		description:'Welkom op de applicatie',
-	};
-
 	APP.schedule = {
 		title:'Schedule',
 		description:'Hieronder ziet u het schema van het toernooi.',
@@ -20,13 +15,14 @@ var APP = APP || {};
 
 	APP.ranking = {
 		title:'Ranking',
-		description:'Hieronder ziet u de ranglijst van het tournooi.',
+		description:'Below you the ranking of pool D.',
 	};
 
 	APP.game = {
-		title:'Game',
-		description:'Hieronder ziet u het scoreverloop van een wedstrijd.',
+		title:'Games',
+		description:'Below you see the games played so far. To edit te score press on it.',
 	};
+
 
 	// Controller Object
 	APP.controller = {
@@ -49,11 +45,8 @@ var APP = APP || {};
 			    '/ranking': function() {
 			    	APP.page.ranking();
 			    },
-			    '/game': function() {
-			    	APP.page.game();
-			    },
-			   	'/movies': function() {
-			    	APP.page.movies();
+			    '/game/:id': function(id) {
+			    	APP.page.game(id);
 			    },
 			    '*': function() {
 			    	APP.page.home();
@@ -99,22 +92,53 @@ var APP = APP || {};
 		},
 
 		ranking: function () {
-			Transparency.render(qwery('[data-route=ranking')[0], APP.ranking);
-			APP.router.change();
-		},
-
-		game: function () {
-			Transparency.render(qwery('[data-route=game')[0], APP.game);
-			APP.router.change();
-		},
-
-		movies: function () {
-			promise.get('https://api.leaguevine.com/v1/games/?tournament_id=19389&fields=%5Bid%2C%20team_1%2C%20team_1_score%2C%20team_2%2C%20team_2_score%5D').then(function(error, data, xhr) {
+			//https://api.leaguevine.com/v1/pools/19222/
+			//https://api.leaguevine.com/v1/pools/?tournament_id=19389&fields=%5Bname%2C%20start_time%2C%20standings%5D
+			promise.get('https://api.leaguevine.com/v1/pools/19222/').then(function(error, data, xhr) {
 		    if (error) {
 		      console.log('Error ' + xhr.status);
 		      // Stop met de functie
 		      return;
 		    }
+
+		    var myData = JSON.parse(data).standings;
+		    console.log(myData);
+		    
+		    var directives = {
+		    	
+		    	teamName: {	text: function(){ return this.team.name; }},
+		    	poolName: {	text: function(){ return this.team.name; }},
+		
+
+
+
+
+
+
+		    }
+
+	
+		    //console.log(poolName);
+
+		    Transparency.render(qwery('[data-bind=rankingObjects')[0], myData, directives);
+		    //console.log('The page contains ' + text.length + ' character(s).');
+			});
+			Transparency.render(qwery('[data-route=ranking')[0], APP.ranking);
+			APP.router.change();
+		},
+
+		game: function (id) {
+			promise.get('https://api.leaguevine.com/v1/games/' + id + '/').then(function(error, data, xhr) {
+		    if (error) {
+		      console.log('Error ' + xhr.status);
+		      // Stop met de functie
+		      return;
+		    }
+		    console.log('Yihaa',JSON.parse(data));
+
+
+
+
 
 		    var myData = JSON.parse(data).objects;
 		
@@ -122,8 +146,14 @@ var APP = APP || {};
 		    
 		    var directives = {
 		    	
+		    	gameID: {
+		    		href: function(params){
+		    			return "/game/" + this.id;
+		    		}
+		    	},
 		    	team1Name: {
 		    		text: function(){
+		    			console.log(this.team_1.name);
 		    			return this.team_1.name;
 		    		}
 		    	},
@@ -131,22 +161,38 @@ var APP = APP || {};
 		    		text: function(){
 		    			return this.team_2.name;
 		    		}
-		    	}
-		    	
-
+		    	},
 		    }
-		    
 
-		    
-
-
-
-		    Transparency.render(qwery('[data-route=movies')[0], myData, directives);
+		    Transparency.render(qwery('[data-bind=gameObjects')[0], myData, directives);
 		    //console.log('The page contains ' + text.length + ' character(s).');
 			});
+			Transparency.render(qwery('[data-route=game')[0], APP.game);
 			APP.router.change();
 		}
+
 	}
+
+
+/*
+	APP.post = {
+		score: function(id, team_1_score, team_2_score) {
+			promise.post(url).then(function(error, data, xhr) {
+				var data = {			
+					"game_id": id,
+			    "team_1_score": team_1_score,
+			    "team_2_score": team_2_score,
+			    "is_final": "True"
+			  }
+
+
+				xhr.setRequestHeader("Authorization","bearer 82996312dc");
+
+			}
+		}
+		
+	}
+*/
 	
 	// DOM ready
 	domready(function () {

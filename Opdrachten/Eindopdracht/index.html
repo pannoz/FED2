@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Score App</title>
+	<link href="static/css/style.css" rel="stylesheet" type="text/css" />
+	<!-- Logo font -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<script src="static/js/lib/page.min.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+	
+	<header class="wrapper">
+		<nav>
+			<ul>
+				<li><a href="#/schedule">Schedule</a></li>
+				<li><a href="#/ranking">Ranking</a></li>
+		  </ul>
+		</nav>
+	</header>
+	
+	<article id="content" class="wrapper">
+
+		<section data-route="schedule">				
+			
+			<header>
+				<h1 data-bind="title"></h1>
+				<p data-bind="description"></p>
+			</header>
+
+			<section class="main">
+				<ul class="header">
+					<li class="scheduleTeam">Team</li>
+					<li class="scheduleScore">Score</li>
+				</ul>
+				<ul class="bodySchedule" data-bind="scheduleObjects">
+					<ul class="bodyRow">
+						<ul class="bodyRowTop">
+							<li data-bind="startTime" class="scheduleTime">Loading ..</li>
+							<li class="scheduleEdit"><a data-bind="gameID" href="#"><i class="fa fa-pencil-square-o"></i></a></li>
+						</ul>
+						<ul class="bodyRowBottom">
+							<li data-bind="team1Name" class="scheduleTeam">Loading ..</li>
+							<li data-bind="team_1_score" class="scheduleScore">..</li>
+							<li data-bind="team2Name" class="scheduleTeam">Loading ..</li>
+							<li data-bind="team_2_score" class="scheduleScore">..</li>
+						</ul>
+					</ul>
+				</ul>
+			</section>
+
+		</section>
+
+		<section data-route="ranking">
+			
+			<header>
+				<h1 data-bind="title"></h1>
+				<p data-bind="description"></p>
+			</header>
+
+			<section class="main">
+				<ul class="header">
+					<li class="rankingTeam">Team</li>
+					<li class="rankingPlayed">Played</li>
+					<li class="rankingWins">Won</li>
+					<li class="rankingGoals">Goals</li>
+				</ul>
+				<ul class="bodyRanking" data-bind="rankingObjects">
+					<ul class="bodyRow">
+						<ul class="bodyRowBottom">
+							<li data-bind="teamName" class="rankingTeam">Loading ..</li>
+							<li data-bind="games_played" class="rankingPlayed">Loading ..</li>
+							<li data-bind="wins" class="rankingWins">Loading ..</li>
+							<li data-bind="plus_minus" class="rankingGoals">Loading ..</li>
+						</ul>
+					</ul>
+				</ul>
+			</section>
+
+		</section>
+
+		<section data-route="game">
+			
+			<header id="postMessage">
+				<h1>Post Succesful</h1>
+				<p>Click <a class="link" href="#/schedule">here</a> to return to the schedule page</p>
+			</header>	
+
+			<header>
+				<h1 data-bind="title">Loading ..</h1>
+				<p data-bind="description">Loading ..</p>
+			</header>	
+
+			<section class="main">
+				<ul class="header">
+					<li class="gameTeam">Team</li>
+					<li class="gameScore">Score</li>
+				</ul>
+				<ul data-bind="gameObjects">
+					<ul class="bodyGame">
+						<ul class="bodyRow">
+							<form class="rangeslider" oninput="amount1.value=rangeInput.value">
+				        <ul class="bodyRowTop">
+									<li data-bind="team1Name" class="gameTeam"></li>
+									<li><output id="team1ScoreTag"name="amount1" for="rangeInput" data-bind="team_1_score"></output><li>
+								</ul>
+				        <ul class="bodyRowBottom">
+				        	<li class=""><input id="team1Score" data-bind="team_1_score" type="range" id="rangeInput" name="rangeInput" min="0" max="15"></li>
+				        </ul>
+					    </form>
+						</ul>
+						<ul class="bodyRow">
+							<form class="rangeslider" oninput="amount2.value=rangeInput.value">
+				        <ul class="bodyRowTop">
+									<li data-bind="team2Name" class="gameTeam"></li>
+									<li><output id="team2ScoreTag"name="amount2" for="rangeInput" data-bind="team_2_score"></output><li>
+								</ul>
+				        <ul class="bodyRowBottom">
+				        	<li class=""><input id="team2Score" data-bind="team_2_score" type="range" id="rangeInput" name="rangeInput" min="0" max="15"></li>
+				        </ul>
+					    </form>
+						</ul>
+					</ul>
+					<ul class="update">
+						<li class="updateButton"><a id="updateScore" data-bind="postID">Update Score</a></li>
+					</ul>
+				</ul>
+			</section>
+			
+		</section>
+
+	</article>
+
+	<footer class="wrapper">
+		<ul>
+			<li>&copy; 2013</li> 
+			<li><a href="http://www.qwebz.nl/" target="_blank">By Qwebz</a></li>
+		</ul>
+	</footer>
+
+	<!-- Routie: 				Zorgt ervoor dat je aan de hand van de URL een functie uit kan voeren. -->
+	<script src="static/js/lib/routie.min.js"></script>
+	<!-- Ready:					Zorgt ervoor dat eerst je DOM (HTML Structuur) wordt opgebouwd, voert hierna pas Javascript uit a.d.h.v. de door jou opgegeven init. -->
+	<script src="static/js/lib/ready.min.js" type="text/javascript"></script>
+	<!-- Qwery:					Een DOM selector engine, dus om HTML elementen te selecteren -->
+	<script src="static/js/lib/qwery.min.js" type="text/javascript"></script>
+	<!-- Transparency:	Verbindt data aan HTML elementen -->
+	<script src="static/js/lib/transparancy.min.js" type="text/javascript"></script>
+	<!-- Promise: 			promise.get/post/put/del (url, data, headers) -->
+	<script src="static/js/lib/promise.min.js" type="text/javascript"></script>
+	<!-- Application -->
+	<script src="static/js/app.js"></script>
+	
+</body>
+</html>
+

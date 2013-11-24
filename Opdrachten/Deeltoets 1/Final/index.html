@@ -149,20 +149,22 @@ Een inner function die toegang heeft tot een outer function variabelen.
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Titel</th>
-						<th>Description</th>
-						<th>Release Date</th>
-						<th>Cover</th>
+						<th>Wedstrijd ID</th>
+						<th>Team 1 ID</th>
+						<th>Score</th>
+						<th>Team 2 ID</th>
 					</tr>
 				</thead>
-				<tbody data-bind="reviews">
+				<tbody data-bind="objects">
 					<tr>
 						<td data-bind="id"></td>
-						<td data-bind="title"></td>
-						<td data-bind="description"></td>
-						<td data-bind="release_date"></td>
-						<td data-bind="cover"></td>
+						<td data-bind="team1Name"></td>
+						<td>
+							<span data-bind="team_1_score"></span>
+							<span> - </span>
+							<span data-bind="team_2_score"></span>
+						</td>
+						<td data-bind="team2Name"></td>
 					</tr>
 				</tbody>
 			</table>
